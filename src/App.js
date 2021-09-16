@@ -1,9 +1,11 @@
 import './App.css';
+import WeatherCard from "./components/WeatherCard";
 
 function App() {
   return (
-      <div>
-        <h1>Weather Dashboard</h1>
+      <div className="container">
+        <h1 style={{textAlign:"center", marginTop:"30px"}}>Weather Dashboard</h1>
+          <WeatherCard/>
       </div>
   );
 }
