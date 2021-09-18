@@ -1,13 +1,12 @@
 import './App.css';
-import WeatherCard from "./components/WeatherCard";
+import React from "react";
+import WeatherInfoService from "./services/WeatherInfoService";
 
-function App() {
+export default function App() {
   return (
       <div className="container">
         <h1 style={{textAlign:"center", marginTop:"30px"}}>Weather Dashboard</h1>
-          <WeatherCard/>
+          <WeatherInfoService/>
       </div>
   );
 }
-
-export default App;
