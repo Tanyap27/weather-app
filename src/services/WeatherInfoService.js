@@ -35,6 +35,7 @@ export default function WeatherInfoService() {
                         const secondResponse = responses[1]
                         const thirdResponse = responses[2]
                         setData([firstResponse.data, secondResponse.data, thirdResponse.data])
+                        console.log([firstResponse, secondResponse, thirdResponse])
                     }))
             } catch(error)  {
                 throw error;

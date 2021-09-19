@@ -10,15 +10,23 @@ export default function WeatherCard({weatherData}) {
 
     return (
         <div>
-            <Card.Group>
+            <Card.Group style={{paddingLeft:'23.5vw'}}>
                 {weatherData.map((weatherInfo) => ((typeof weatherInfo.main != 'undefined') ? (
                     <Card key={weatherInfo.id}>
                         <Card.Content>
-                            <Card.Header className="header">{weatherInfo.name}</Card.Header>
+                            <h3 style={{float:'left'}}>{weatherInfo.name}</h3>
+                            <div style={{ textAlign: 'right' }}><img src={getIconUrl(weatherInfo.weather[0].icon)}  alt="Weather Icon"/></div>
+                        </Card.Content>
+                        <Card.Content style={{
+                            height: "200px",
+                            backgroundImage: `url(https://cdn.pixabay.com/photo/2012/06/08/06/19/clouds-49520_1280.jpg)`,// TODO: use image from local storage
+                            backgroundSize: "cover",
+                        }}>
                             <Card.Description>
-                                    <p style={{ float: 'left' }}>Temperature: {weatherInfo.main.temp}</p>
-                                    <div style={{ textAlign: 'right' }}><img src={getIconUrl(weatherInfo.weather[0].icon)}  alt="Weather Icon"/></div>
+                                    <h3 style={{ float: 'left', color:'white' }}>Temperature: {weatherInfo.main.temp} &deg;C</h3>
                             </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
                             <div className="ui bottom attached button">
                                 <Link
                                     to={{

@@ -6,12 +6,8 @@ import DetailedWeatherView from "./components/DetailedWeatherView";
 
 export default function App() {
     return (
-        // <div className="container">
-        //   <h1 style={{textAlign:"center", marginTop:"30px"}}>Weather Dashboard</h1>
-        //     <WeatherInfoService/>
-        // </div>
         <div className="App">
-            <h1 style={{textAlign:"center", marginTop:"30px"}}>Weather Dashboard</h1>
+            <h1 style={{textAlign:"center", margin:"40px 0px 60px 0"}}>Weather Dashboard</h1>
             <BrowserRouter>
                 <Switch>
                     <Route path="/" exact>
