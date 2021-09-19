@@ -5,42 +5,47 @@ import axios from "axios";
 export const baseUrl = 'https://api.openweathermap.org/data/2.5';
 export const apiKey = process.env.REACT_APP_API_KEY;
 
+if (apiKey === undefined) {
+    throw new Error('No Open Weather API Key defined - ensure you set a variable called REACT_APP_OPEN_WEATHER_API_KEY')
+}
+
 export default function WeatherInfoService() {
     const [lat, setLat] = useState([]);
     const [long, setLong] = useState([]);
     const [data, setData] = useState([]);
 
+    const getWeatherInformation = async () => {
+        const London =  `${baseUrl}/weather?q=London,uk&units=metric&APPID=${apiKey}`;
+        const Berlin = `${baseUrl}/weather?q=Berlin, de&units=metric&APPID=${apiKey}`;
+        const Current = `${baseUrl}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${apiKey}`;
+
+        navigator.geolocation.getCurrentPosition(function(Position) {
+            setLat(Position.coords.latitude);
+            setLong(Position.coords.longitude);
+        }, function (e) {
+            console.error("Error Code");
+        },{
+            enableHighAccuracy: true, maximumAge:15000, timeout: 10000
+        });
+
+        const requestLondon = axios.get(London);
+        const requestBerlin = axios.get(Berlin);
+        const requestCurrent = axios.get(Current)
+        try{
+            await axios.all([requestCurrent, requestLondon, requestBerlin])
+                .then(axios.spread((...responses) => {
+                    const firstResponse = responses[0]
+                    const secondResponse = responses[1]
+                    const thirdResponse = responses[2]
+                    setData([firstResponse.data, secondResponse.data, thirdResponse.data])
+                    console.log(secondResponse)
+                }))
+        } catch(error)  {
+            throw error;
+        }
+    };
+
     useEffect(() => {
-        const getWeatherInformation = async () => {
-            const London =  `${baseUrl}/weather?q=London,uk&units=metric&APPID=${apiKey}`;
-            const Berlin = `${baseUrl}/weather?q=Berlin, de&units=metric&APPID=${apiKey}`;
-            const Current = `${baseUrl}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${apiKey}`;
-
-            navigator.geolocation.getCurrentPosition(function(Position) {
-                setLat(Position.coords.latitude);
-                setLong(Position.coords.longitude);
-            }, function (e) {
-                console.error("Error Code");
-                },{
-                enableHighAccuracy: true, maximumAge:15000, timeout: 10000
-            });
-
-            const requestLondon = axios.get(London);
-            const requestBerlin = axios.get(Berlin);
-            const requestCurrent = axios.get(Current)
-            try{
-                await axios.all([requestCurrent, requestLondon, requestBerlin])
-                    .then(axios.spread((...responses) => {
-                        const firstResponse = responses[0]
-                        const secondResponse = responses[1]
-                        const thirdResponse = responses[2]
-                        setData([firstResponse.data, secondResponse.data, thirdResponse.data])
-                    }))
-            } catch(error)  {
-                throw error;
-            }
-        };
-        // setTimeout(getWeatherInformation, 10000);
         getWeatherInformation()
     }, [lat, long]);
 
