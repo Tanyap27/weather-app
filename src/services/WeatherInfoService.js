@@ -12,8 +12,8 @@ export default function WeatherInfoService() {
 
     useEffect(() => {
         const getWeatherInformation = async () => {
-            const London =  `${baseUrl}/weather?q=London,uk&APPID=${apiKey}`;
-            const Berlin = `${baseUrl}/weather?q=Berlin, de&APPID=${apiKey}`;
+            const London =  `${baseUrl}/weather?q=London,uk&units=metric&APPID=${apiKey}`;
+            const Berlin = `${baseUrl}/weather?q=Berlin, de&units=metric&APPID=${apiKey}`;
             const Current = `${baseUrl}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${apiKey}`;
 
             navigator.geolocation.getCurrentPosition(function(Position) {
@@ -22,7 +22,7 @@ export default function WeatherInfoService() {
             }, function (e) {
                 console.error("Error Code");
                 },{
-                enableHighAccuracy: true, maximumAge:15000, timeout: 30000
+                enableHighAccuracy: true, maximumAge:15000, timeout: 10000
             });
 
             const requestLondon = axios.get(London);
@@ -35,7 +35,6 @@ export default function WeatherInfoService() {
                         const secondResponse = responses[1]
                         const thirdResponse = responses[2]
                         setData([firstResponse.data, secondResponse.data, thirdResponse.data])
-                        console.log([firstResponse, secondResponse, thirdResponse])
                     }))
             } catch(error)  {
                 throw error;
