@@ -5,7 +5,6 @@ This app is based on:
 
 - React Javascript
 - React Hooks
-- Async Communication
 - Styling with semantic-ui react framework
 
 The app has two pages:
@@ -37,6 +36,10 @@ Runs the app in the development mode.
 Open http://localhost:3000 to view it in the browser.
 
 The page will reload if you make edits.
+
+### npm test
+
+To run all the test suites
 
 ## Weather App Description
 
