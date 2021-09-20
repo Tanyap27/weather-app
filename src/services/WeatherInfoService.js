@@ -12,7 +12,7 @@ if (apiKey === undefined) {
 export const getWeatherInformation = async (lat, long) => {
 
     const London =  `${baseUrl}/weather?q=London,uk&units=metric&APPID=${apiKey}`;
-    const Berlin = `${baseUrl}/weather?q=Berlin, de&units=metric&APPID=${apiKey}`;
+    const Berlin = `${baseUrl}/weather?q=Berlin,de&units=metric&APPID=${apiKey}`;
     const Current = `${baseUrl}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${apiKey}`;
 
     const requestLondon = axios.get(London);
@@ -20,11 +20,12 @@ export const getWeatherInformation = async (lat, long) => {
     const requestCurrent = axios.get(Current)
 
     try{
-        const response = await axios.all([requestCurrent, requestBerlin, requestLondon])
+        const response = await axios.all([requestBerlin, requestLondon, requestCurrent])
             .then(axios.spread((...responses) => {
                 const firstResponse = responses[0]
                 const secondResponse = responses[1]
                 const thirdResponse = responses[2]
+                console.log(firstResponse)
                 return ([firstResponse.data, secondResponse.data, thirdResponse.data])
             }))
         return response;
