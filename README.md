@@ -14,8 +14,8 @@ The app has two pages:
 
 ## Dependencies
 
-This project was boot-strapped with [Create React App](https://github.com/facebook/create-react
--app).
+Clone the github repo to your machine using
+```git clone https://github.com/Tanyap27/weather-app```
 
 The app uses [Open Weather](https://openweathermap.org/) for the data and
 **the user will need to register** and generate a free API Key(which might take 15-30 minutes to be active).
@@ -25,11 +25,18 @@ requests.
 
 # Running the App
 
-To run the ap in development mode go into main(weahter-app) folder and execute:
+To run the ap in development mode go into main(weather-app) folder and execute:
 
-npm install
-npm start
+### npm install
+
+Installs all the required dependencies for the project
+
+### npm start
+
+Runs the app in the development mode.
+Open http://localhost:3000 to view it in the browser.
 
 The page will reload if you make edits.
+
 
 
