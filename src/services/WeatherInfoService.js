@@ -25,7 +25,6 @@ export const getWeatherInformation = async (lat, long) => {
                 const firstResponse = responses[0]
                 const secondResponse = responses[1]
                 const thirdResponse = responses[2]
-                console.log(firstResponse)
                 return ([firstResponse.data, secondResponse.data, thirdResponse.data])
             }))
         return response;
@@ -43,8 +42,8 @@ export default function WeatherInfoService() {
         navigator.geolocation.getCurrentPosition(function(Position) {
             setLat(Position.coords.latitude);
             setLong(Position.coords.longitude);
-        }, function (e) {
-            console.error("Error Code");
+        }, function (error) {
+            throw error;
         },{
             enableHighAccuracy: true, maximumAge:15000, timeout: 10000
         });

@@ -3,7 +3,6 @@ import { Card, Button, Header } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
 
 export default function WeatherCard({weatherData}) {
-
      function getIconUrl(code) {
         return `http://openweathermap.org/img/wn/${code}.png`;
     }
